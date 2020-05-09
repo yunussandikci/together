@@ -1,0 +1,30 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+.background {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: #F1F6F9;
+}
+
+html { font-size: 22px; }
+body { padding: 50px; }
+
+.video-container {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: calc(100% - 20px);
+}
+
+video {
+    margin-right: 70px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.30);
+    border-radius: 10px;
+}
