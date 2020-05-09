@@ -5,7 +5,7 @@ localVideo = document.getElementById('video');
 
 navigator.mediaDevices.getUserMedia({video: true, audio: true}).then(function (stream) {
     localStream = stream;
-    getOrCreateVideo(socket.id, stream)
+    getOrCreateVideo(socket.id, stream, true)
     socket.emit("room", getRoomKey());
 })
 
@@ -54,7 +54,7 @@ function getOrCreatePeering(socketId) {
             peerConnection = new RTCPeerConnection({'iceServers': [{'urls': 'stun:stun.l.google.com:19302'}]});
             peerConnection.addStream(localStream);
             peerConnection.ontrack = function (event) {
-                getOrCreateVideo(socketId, event.streams[0])
+                getOrCreateVideo(socketId, event.streams[0], false)
             }
             peerConnection.onicecandidate = function (event) {
                 if (event.candidate != null) {
@@ -73,13 +73,14 @@ function getRoomKey() {
     return new URLSearchParams(window.location.search).get("key");
 }
 
-function getOrCreateVideo(socketId, stream) {
+function getOrCreateVideo(socketId, stream, isMuted) {
     let socketVideo = document.getElementById("video-" + socketId);
     if (socketVideo == null) {
         socketVideo = document.createElement("video");
         let videoContainer = document.getElementsByClassName("video-container")[0];
         socketVideo.id = ("video-" + socketId)
         socketVideo.autoplay = true;
+        socketVideo.muted = isMuted
         videoContainer.appendChild(socketVideo)
         onVideoCountChange()
     }
