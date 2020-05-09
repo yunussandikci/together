@@ -1,6 +1,6 @@
 
 # Together
-Together is a online video meeting web application. It uses WebRTC for video/audio streaming and Socket.IO for signaling.
+Together is a online video meeting web application. It uses WebRTC for video/audio streaming and Socket.IO for signaling. It create and manges multiple WebRTC connections according to room you join and streams the media. 
 
 ![](https://abload.de/img/screenshot2020-05-09a6tkyu.png)
 
