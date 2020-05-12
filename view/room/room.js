@@ -81,7 +81,12 @@ function getOrCreateVideo(socketId, stream, isMuted) {
         socketVideo.id = ("video-" + socketId)
         socketVideo.autoplay = true;
         socketVideo.muted = isMuted
-        videoContainer.appendChild(socketVideo)
+        //video div
+        var videoItem = document.createElement("DIV");
+        videoItem.className="video-item";
+        videoItem.appendChild(socketVideo);
+        videoContainer.appendChild(videoItem);
+        //video div
         onVideoCountChange()
     }
     socketVideo.srcObject = stream;
@@ -94,14 +99,24 @@ function deleteVideo(socketId) {
 }
 
 function onVideoCountChange() {
-    videos = document.querySelectorAll("video");
-    videoWidth = videos.length;
+    videoItem = document.getElementsByClassName("video-item");
+    videoWidth = videoItem.length;
 
-    if(videos.length === 1) {
-        videos[0].style.width = "cal"
+    let height = document.body.clientHeight;
+    let videoHeight=100;
+
+    if(videoItem.length>=2){
+      videoHeight=40;
+    }
+    if(videoItem.length>4){
+      videoHeight=24;
+    }
+
+    if(videoItem.length === 1) {
+        videoItem[0].style.height = "100%";
     } else {
-        for(let i=0;i<videos.length; i++) {
-            videos[i].style.width = "calc((90%/" + videos.length + ") - (" + videos.length + "* 10px))";
+        for(let i=0;i<videoItem.length; i++) {
+            videoItem[i].style.height = videoHeight+"%";
         }
     }
 }
